@@ -1,0 +1,110 @@
+
+package Pamela;
+
+import java.util.Scanner;
+
+/**
+ 1)LLENA LA MATRIZ
+ 2)MOSTRAR LA MATRIZ
+ 3)LLENAR MATRIZ TRANSPUESTA (Mt)
+ 4)MOSTRAR MATRIZ TRANSPUESTA (Mt)
+ 5)HACER QUE Mt[I][J]=-Mt[I][J]
+ 6)VERIFIAR Mt==M
+ 7)SI SON IGUALES MOSTRAR "ES ANTISIMETRICA" SINO "NO ES ANTISIMETRICA"
+ */
+public class ejercicio_26 {
+    public static void main(String[] args) {
+        int n;
+        boolean anti=true;
+        Scanner input=new Scanner(System.in).useDelimiter("\n");
+        
+        System.out.print("INGRESE EL ORDEN DE LA MATRIZ: ");
+        n=input.nextInt();
+        
+        int matriz[][]=new int [n][n];
+        int matrizTranspuesta[][]=new int [n][n];
+        
+        llenarMatriz(matriz, n);
+        mostrarMatriz(matriz, n);
+        
+        System.out.println("");
+        
+        matrizTranspuesta=transpuesta(matriz,n);
+        mostrarMatriz(matrizTranspuesta, n);
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matriz[i][j]!=matrizTranspuesta[i][j]){
+                    anti=false;
+                }
+            }
+        }
+        
+        if(anti){
+            System.out.println("ES ANTISIMETRICA");
+        }else{
+            System.out.println("NO ES ANTIMETRICA");
+        }
+        
+    }
+    
+   
+    
+   
+    
+    public static int[][] transpuesta(int matriz[][],int n){
+       
+        int matrizAux[][]=new int [n][n];
+       
+        for (int i = 0; i < n; i++) {
+            
+            for (int j = 0; j < n; j++) {
+                matrizAux[i][j]=matriz[j][i];
+                matrizAux[i][j]=matrizAux[i][j]*-1;
+               
+            }
+            
+        }
+       
+        return matrizAux;
+    }
+    
+    public static void llenarMatriz(int matriz[][],int n){
+        Scanner input=new Scanner(System.in).useDelimiter("\n");
+        int numero,cont=0;
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print("INGRESE EL VALOR DE "+(cont+1)+": ");
+                numero=input.nextInt();
+                matriz[i][j]=numero;
+                cont++;
+            }
+        }
+        System.out.println("");
+    }
+    
+    public static void mostrarMatriz(int [][]matriz,int n){
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.printf("%-5d",matriz[i][j]);                
+            }
+            System.out.println("\n");
+        }
+    }
+    
+}
+
+
+/*    ------->A<--------  ||          ------>B<--------
+
+          (0,0)                         (0,0)
+           1    2   3                    1    4    7
+           
+           4    5   6 (1,2)     ==>      2    5    8 (1,2)
+           
+           7    8   9                    3    6    9
+               (2,1)                         (2,1)
+
+
+*/
